@@ -15,9 +15,25 @@
             <h3>Time: <span class="timer"></span></h3>
         </header>
         <main>
-            <section class="title"></section>
-            <section id="questions" class="quiz"></section>
-            <section class="results"></section>
+            <section class="title">
+                <h2>Javascript Coding Quiz</h2>
+                <p>
+                    Welcome to the Javascript Coding Quiz! This quiz will test your knowledge of basic Javascript concepts.
+                </p>
+                <button id="start-quiz">Start Quiz</button>
+            </section>
+            <section id="questions" class="quiz">
+                <h2 id="current-question"></h2>
+                <ol id="answers"></ol>
+            </section>
+            <section class="results">
+                <h2>All done!</h2>
+                <p>Your final score is: <span id="final-score"></span>.</p>
+                <form>
+                    <input type="text" name="initials" id="initials">
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
         </main>
         <script src="./assets/js/questions.js"></script>
         <script src="./assets/js/logic.js"></script>
