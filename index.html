@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./assets/css/reset.css" />
+        <link rel="stylesheet" href="./assets/css/style.css" />
+        <title>Code Quiz</title>
+    </head>
+    <body>
+        <header>
+            <nav><a href="./highscores.html">High Scores</a></nav>
+            <h1>Code Quiz</h1>
+            <h3>Time: <span id="timer">100</span></h3>
+        </header>
+        <main>
+            <section id="title" class="title">
+                <h2>Javascript Coding Quiz</h2>
+                <p>
+                    Welcome to the Javascript Coding Quiz! This quiz will test
+                    your knowledge of basic Javascript concepts.
+                </p>
+                <div class="center">
+                    <button id="start-quiz">Start Quiz</button>
+                </div>
+            </section>
+            <section id="questions" class="quiz">
+                <h2 id="current-question"></h2>
+                <ol id="answers"></ol>
+            </section>
+            <section id = "results" class="results">
+                <h2>All done!</h2>
+                <p>Your final score is: <span id="final-score"></span>.</p>
+                <form>
+                    <input type="text" name="initials" id="initials" />
+                    <button type="submit" id="submit">Submit</button>
+                </form>
+            </section>
+            <div id="feedback">
+                <h3></h3>
+            </div>
+        </main>
+        <script src="./assets/js/questions.js"></script>
+        <script src="./assets/js/logic.js"></script>
+    </body>
+</html>
