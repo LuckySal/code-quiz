@@ -20,9 +20,9 @@ var formInitials = document.getElementById("initials");
 function init() {
     timeLeft = time;
     timerEl.textContent = timeLeft;
-    questionsEl.setAttribute("display", "none");
-    resultsEl.setAttribute("display", "none");
-    feedbackEl.setAttribute("display", "none");
+    questionsEl.setAttribute("style", "display: none");
+    resultsEl.setAttribute("style", "display: none");
+    feedbackEl.setAttribute("style", "display: none");
 }
 
 /// FUNCTION TO START THE QUIZ
