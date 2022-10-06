@@ -3,6 +3,7 @@ var currentQuestion;
 const time = 100;
 var timeLeft;
 var timerId;
+var questions;
 // DOM Elements
 var titleEl = document.getElementById("title");
 var questionsEl = document.getElementById("questions");
@@ -14,15 +15,28 @@ var timerEl = document.getElementById("timer");
 var btnStart = document.getElementById("start-quiz");
 var btnSubmit = document.getElementById("submit");
 
+var answersEl = doc.getElementById("answers");
+
 // DOM Form input
 var formInitials = document.getElementById("initials");
 
+// Initialize the page
 function init() {
     timeLeft = time;
     timerEl.textContent = timeLeft;
     questionsEl.setAttribute("style", "display: none");
     resultsEl.setAttribute("style", "display: none");
     feedbackEl.setAttribute("style", "display: none");
+
+    questions = JSON.parse(JSON.stringify(quizQuestions));
+}
+
+// Durstenfeld shuffle
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
 /// FUNCTION TO START THE QUIZ
@@ -41,6 +55,7 @@ function startQuiz() {
 /// FUNCTION TO GET/SHOW EACH QUESTION ///
 function getQuestion() {
     // get current question object from array
+    currentQuestion = quizQuestions.pop();
     // update title with current question
     // clear out any old question choices
     // loop over choices
@@ -53,7 +68,7 @@ function getQuestion() {
 /// FUNCTION FOR CLICKING A QUESTION ///
 function questionClick(event) {
     // if the clicked element is not a choice button, do nothing.
-    if (something) {
+    if (event.target) {
     }
 
     if (something) {
@@ -111,7 +126,7 @@ function saveHighscore() {
 // user clicks button to submit initials
 btnSubmit.addEventListener("click", saveHighscore)
 // user clicks button to start quiz
-
+btnStart.addEventListener("click", startQuiz)
 // user clicks on element containing choices
 
 
