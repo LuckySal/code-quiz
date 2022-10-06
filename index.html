@@ -12,13 +12,14 @@
         <header>
             <nav><a href="./highscores.html">High Scores</a></nav>
             <h1>Code Quiz</h1>
-            <h3>Time: <span class="timer">100</span></h3>
+            <h3>Time: <span id="timer">100</span></h3>
         </header>
         <main>
-            <section class="title">
+            <section id="title" class="title">
                 <h2>Javascript Coding Quiz</h2>
                 <p>
-                    Welcome to the Javascript Coding Quiz! This quiz will test your knowledge of basic Javascript concepts.
+                    Welcome to the Javascript Coding Quiz! This quiz will test
+                    your knowledge of basic Javascript concepts.
                 </p>
                 <div class="center">
                     <button id="start-quiz">Start Quiz</button>
@@ -28,12 +29,12 @@
                 <h2 id="current-question"></h2>
                 <ol id="answers"></ol>
             </section>
-            <section class="results">
+            <section id = "results" class="results">
                 <h2>All done!</h2>
                 <p>Your final score is: <span id="final-score"></span>.</p>
                 <form>
-                    <input type="text" name="initials" id="initials">
-                    <button type="submit">Submit</button>
+                    <input type="text" name="initials" id="initials" />
+                    <button type="submit" id="submit">Submit</button>
                 </form>
             </section>
             <div id="feedback">

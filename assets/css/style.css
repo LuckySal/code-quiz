@@ -21,17 +21,14 @@ main {
     margin: 0 30%;
 }
 
-.title p{
+#title p{
     text-align: justify;
 }
 
-.title h2 {
+#title h2 {
     text-align: center;
     font-size: 32px;
     margin: 5%;
-}
-.container {
-    position: relative;
 }
 
 #start-quiz {
