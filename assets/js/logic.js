@@ -15,21 +15,10 @@ var timerEl = document.getElementById("timer");
 var btnStart = document.getElementById("start-quiz");
 var btnSubmit = document.getElementById("submit");
 
-var answersEl = doc.getElementById("answers");
+var answersEl = document.getElementById("answers");
 
 // DOM Form input
 var formInitials = document.getElementById("initials");
-
-// Initialize the page
-function init() {
-    timeLeft = time;
-    timerEl.textContent = timeLeft;
-    questionsEl.setAttribute("style", "display: none");
-    resultsEl.setAttribute("style", "display: none");
-    feedbackEl.setAttribute("style", "display: none");
-
-    questions = JSON.parse(JSON.stringify(quizQuestions));
-}
 
 // Durstenfeld shuffle
 function shuffleArray(array) {
@@ -39,14 +28,26 @@ function shuffleArray(array) {
     }
 }
 
+// Initialize the page
+function init() {
+    timeLeft = time;
+    timerEl.textContent = timeLeft;
+    questionsEl.style.display = "none";
+    resultsEl.style.display = "none";
+    feedbackEl.style.display = "none";
+
+    questions = JSON.parse(JSON.stringify(quizQuestions));
+    shuffleArray(questions);
+}
+
 /// FUNCTION TO START THE QUIZ
 function startQuiz() {
     // hide start screen
-
+    titleEl.style.display = "none";
     // un-hide questions section
-
+    questionsEl.style.display = "block";
     // start timer
-
+    timerId = setInterval(clockTick, 1000);
     // show starting time
 
     getQuestion();
@@ -55,43 +56,49 @@ function startQuiz() {
 /// FUNCTION TO GET/SHOW EACH QUESTION ///
 function getQuestion() {
     // get current question object from array
-    currentQuestion = quizQuestions.pop();
+    currentQuestion = questions.pop().question;
+    if (!currentQuestion) {
+        quizEnd();
+        return;
+    }
     // update title with current question
+    titleEl.value = currentQuestion.question;
     // clear out any old question choices
+    answersEl.innerHTML = "";
     // loop over choices
-    // FOR {
-    // create new button for each choice
-    // display on the page
-    // }
+    for (var i = 0; i < currentQuestion.choices.length; i++) {
+        // create new button for each choice
+        var item = document.createElement("li");
+        item.value = currentQuestion.choices[i];
+        // display on the page
+        answersEl.appendChild(item);
+    }
 }
 
 /// FUNCTION FOR CLICKING A QUESTION ///
 function questionClick(event) {
     // if the clicked element is not a choice button, do nothing.
-    if (event.target) {
+    if (event.target.tagName !== "LI") {
+        return;
     }
-
-    if (something) {
-        // check if user guessed wrong
-        // penalize time
-        // display new time on page
-        // give them feedback, letting them know it's wrong
+    var isCorrect;
+    if (event.target.value === currentQuestion.answer) {
+        isCorrect = true;
     } else {
-        // give them feedback, letting them know it's right
+        isCorrect = false;
+        // penalize time
+        timeLeft -= 10;    
     }
 
-    // flash right/wrong feedback on page for a short period of time
+    // TODO: flash right/wrong feedback on page for a short period of time
 
-    // move to next question
-
-    // check if we've run out of questions
-    // if so, end the quiz
-    // else, get the next question
+    getQuestion();
 }
 
 /// FUNCTION TO END THE QUIZ ///
-function quizEnd(isWon) {
+function quizEnd() {
     // stop timer
+    clearInterval(timerId);
     // show end screen
     // show final score
     // hide questions section
@@ -116,18 +123,17 @@ function saveHighscore() {
     if (!scores) scores = [];
     // format new score object for current user
     var newScore = {
-        score: time
-    }
+        score: time,
+    };
     // save to localstorage
     // redirect to next page
 }
 
 /// CLICK EVENTS ///
 // user clicks button to submit initials
-btnSubmit.addEventListener("click", saveHighscore)
+btnSubmit.addEventListener("click", saveHighscore);
 // user clicks button to start quiz
-btnStart.addEventListener("click", startQuiz)
+btnStart.addEventListener("click", startQuiz);
 // user clicks on element containing choices
-
 
 init();
