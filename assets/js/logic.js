@@ -123,6 +123,7 @@ function clockTick() {
     // check if user ran out of time
     if (timeLeft < 0) {
         timeLeft = 0;
+        timerEl.textContent = 0;
         quizEnd();
     }
 }
