@@ -43,7 +43,7 @@ function init() {
 }
 
 /// FUNCTION TO START THE QUIZ
-function startQuiz() {
+function startQuiz(event) {
     // hide start screen
     titleEl.style.display = "none";
     // un-hide questions section
@@ -127,7 +127,8 @@ function clockTick() {
     }
 }
 
-function saveHighscore() {
+function saveHighscore(event) {
+    event.preventDefault();
     // get value of input box - for initials
     var initials = formInitials.value;
     // make sure value wasn't empty
@@ -144,7 +145,7 @@ function saveHighscore() {
     // save to localstorage
     localStorage.setItem("highScores", JSON.stringify(scores));
     // redirect to next page
-    window.location = "highscores.html";
+    window.location.assign("highscores.html");
 }
 
 /// CLICK EVENTS ///

@@ -9,6 +9,7 @@ function printHighscores() {
     } else {
         scores = [];
     }
+    scoresListEl.innerHTML = "";
     // loop through scores
     scores.forEach((element) => {
         // create li tag for each high score

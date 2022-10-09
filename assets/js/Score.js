@@ -4,9 +4,9 @@ class Score {
         this.initials = initials;
     }
     static compare(a, b) {
-        if (a.score > b.score) {
+        if (a.score < b.score) {
             return 1;
-        } else if (a.score < b.score) {
+        } else if (a.score > b.score) {
             return -1;
         } else {
             if (a.initials > b.initials) {
