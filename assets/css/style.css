@@ -42,7 +42,10 @@ h2 {
 .wrapper {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
+}
+.wrapper button {
+    width: fit-content;
 }
 
 #scores-list li{
@@ -69,4 +72,8 @@ h2 {
     color: gray;
     text-align: center;
     margin: 15px;
+}
+
+ol {
+    list-style: decimal outside;
 }
