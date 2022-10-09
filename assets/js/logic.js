@@ -10,6 +10,8 @@ var questionsEl = document.getElementById("questions");
 var resultsEl = document.getElementById("results");
 var feedbackEl = document.getElementById("feedback");
 var timerEl = document.getElementById("timer");
+var scoreEl = document.getElementById("final-score");
+var questionTitleEl = document.getElementById("current-question");
 
 // DOM Buttons
 var btnStart = document.getElementById("start-quiz");
@@ -56,33 +58,36 @@ function startQuiz() {
 /// FUNCTION TO GET/SHOW EACH QUESTION ///
 function getQuestion() {
     // get current question object from array
-    currentQuestion = questions.pop().question;
+    currentQuestion = questions.pop();
     if (!currentQuestion) {
         quizEnd();
         return;
     }
     // update title with current question
-    titleEl.value = currentQuestion.question;
+    questionTitleEl.textContent = currentQuestion.question;
     // clear out any old question choices
     answersEl.innerHTML = "";
     // loop over choices
     for (var i = 0; i < currentQuestion.choices.length; i++) {
         // create new button for each choice
         var item = document.createElement("li");
-        item.value = currentQuestion.choices[i];
+        var choiceBtn = document.createElement("button")
+        choiceBtn.textContent = currentQuestion.choices[i];
         // display on the page
         answersEl.appendChild(item);
+        item.appendChild(choiceBtn);
     }
 }
 
 /// FUNCTION FOR CLICKING A QUESTION ///
 function questionClick(event) {
     // if the clicked element is not a choice button, do nothing.
-    if (event.target.tagName !== "LI") {
+    console.log(event.target.tagName);
+    if (event.target.tagName !== "BUTTON") {
         return;
     }
     var isCorrect;
-    if (event.target.value === currentQuestion.answer) {
+    if (event.target.textContent === currentQuestion.answer) {
         isCorrect = true;
     } else {
         isCorrect = false;
@@ -90,8 +95,12 @@ function questionClick(event) {
         timeLeft -= 10;    
     }
 
-    // TODO: flash right/wrong feedback on page for a short period of time
-
+    // flash right/wrong feedback on page for a short period of time
+    feedbackEl.textContent = (isCorrect ? "Correct!" : "Incorrect!");
+    feedbackEl.style.display = "block";
+    setTimeout(function () {
+        feedbackEl.style.display = "none";
+    }, 1500);
     getQuestion();
 }
 
@@ -100,14 +109,22 @@ function quizEnd() {
     // stop timer
     clearInterval(timerId);
     // show end screen
+    resultsEl.style.display = "block";
     // show final score
+    scoreEl.textContent = timeLeft;
     // hide questions section
+    questionsEl.style.display = "none"
 }
 
 /// FUNCTION FOR UPDATING THE TIME ///
 function clockTick() {
     // update time
+    timerEl.textContent = --timeLeft;
     // check if user ran out of time
+    if (timeLeft < 0) {
+        timeLeft = 0;
+        quizEnd();
+    }
 }
 
 function saveHighscore() {
@@ -126,7 +143,9 @@ function saveHighscore() {
         score: time,
     };
     // save to localstorage
+    localStorage
     // redirect to next page
+    window.location = "highscores.html";
 }
 
 /// CLICK EVENTS ///
@@ -135,5 +154,6 @@ btnSubmit.addEventListener("click", saveHighscore);
 // user clicks button to start quiz
 btnStart.addEventListener("click", startQuiz);
 // user clicks on element containing choices
+questionsEl.addEventListener("click", questionClick);
 
 init();
