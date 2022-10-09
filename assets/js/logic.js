@@ -139,11 +139,10 @@ function saveHighscore() {
     var scores = JSON.parse(localStorage.getItem("highScores"));
     if (!scores) scores = [];
     // format new score object for current user
-    var newScore = {
-        score: time,
-    };
+    var score = new Score(timeLeft, initials);
+    scores.push(score);
     // save to localstorage
-    localStorage
+    localStorage.setItem("highScores", JSON.stringify(scores));
     // redirect to next page
     window.location = "highscores.html";
 }
