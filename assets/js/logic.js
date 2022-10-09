@@ -82,7 +82,6 @@ function getQuestion() {
 /// FUNCTION FOR CLICKING A QUESTION ///
 function questionClick(event) {
     // if the clicked element is not a choice button, do nothing.
-    console.log(event.target.tagName);
     if (event.target.tagName !== "BUTTON") {
         return;
     }
